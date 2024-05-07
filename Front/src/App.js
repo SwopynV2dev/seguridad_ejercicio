@@ -94,7 +94,7 @@ const App = () => {
     e.preventDefault();
     if (isEmailValid(email) && isPasswordValid(password)) {
       try {
-        const response = await fetch('http://172.20.10.7:8000/server/login/', {
+        const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
