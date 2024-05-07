@@ -90,11 +90,35 @@ const App = () => {
     return password.length >= 6;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isEmailValid(email) && isPasswordValid(password)) {
+      try {
+        const response = await fetch('http://172.20.10.7:8000/server/login/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        if (response.ok) {
+          // Handle successful login
+          console.log('Login successful');
+        } else {
+          // Handle login failure
+          console.error('Login failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  };
+
   return (
     <Container>
       <LoginContainer>
         <Title>Iniciar Sesión</Title>
-        <form>
+        <form onSubmit={handleSubmit}>
           <FormGroup>
             <Label>Email</Label>
             <Input
@@ -119,7 +143,7 @@ const App = () => {
             <Icon><AiOutlineLock size={20} /></Icon>
             {password !== '' && !isPasswordValid(password) && <small style={{ color: 'red' }}>La contraseña debe tener al menos 6 caracteres.</small>}
           </FormGroup>
-          <Button disabled={!isEmailValid(email) || !isPasswordValid(password)}>Iniciar Sesión</Button>
+          <Button type="submit" disabled={!isEmailValid(email) || !isPasswordValid(password)}>Iniciar Sesión</Button>
         </form>
       </LoginContainer>
     </Container>
