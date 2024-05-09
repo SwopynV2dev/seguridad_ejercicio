@@ -9,14 +9,6 @@ class Login(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
         
     def post(self, request, *args, **kwargs):  
-        ip = request.META.get('REMOTE_ADDR')
-
-        ip_key = f"login_ip_{ip}"
-        ip_count = cache.get(ip_key, 0)
-        if ip_count >= 30:
-            return JsonResponse({'message': 'Demasiadas solicitudes desde esta dirección IP'}, status=status.HTTP_429_TOO_MANY_REQUESTS)
-
-        cache.set(ip_key, ip_count + 1, timeout=10)  
 
         username = request.data.get('username', '')
         password = request.data.get('password', '')
