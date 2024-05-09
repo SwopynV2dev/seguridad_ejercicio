@@ -18,11 +18,12 @@ class Login(TokenObtainPairView):
 
         cache.set(ip_key, ip_count + 1, timeout=10)  
 
-        username = request.data.get('username', '')
+        username = request.data.get('email', '')
         password = request.data.get('password', '')
         
 
         user = authenticate(username=username, password=password)
+        
 
         if user is not None:
             login_serializer = self.serializer_class(data=request.data)
