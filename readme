@@ -1,0 +1,28 @@
+installar los siguiente para usutilizar django 
+
+linux 
+python -m pip install Django==5.0.6
+
+windows 
+py -m pip install Django==5.0.6
+
+pip install django-cors-headers
+
+pip install djangorestframework
+pip install markdown      
+pip install django-filter
+
+pip install djangorestframework-simplejwt
+  
+Necesitan hacer mmigracion 
+python 
+python manage.py migrate
+
+python 3 
+python3 manage.py migrate
+
+crear usuario
+
+python manage.py createsuperuser
+
+python3 manage.py createsuperuser
