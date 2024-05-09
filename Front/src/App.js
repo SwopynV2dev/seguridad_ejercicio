@@ -78,12 +78,12 @@ const Button = styled.button`
 `;
 
 const App = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const isEmailValid = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
+  const isUsernameValid = (username) => {
+    // You can apply your validation logic here
+    return username.trim() !== '';
   };
 
   const isPasswordValid = (password) => {
@@ -92,14 +92,14 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEmailValid(email) && isPasswordValid(password)) {
+    if (isUsernameValid(username) && isPasswordValid(password)) {
       try {
         const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ username, password }),
         });
         if (response.ok) {
           // Handle successful login
@@ -120,16 +120,16 @@ const App = () => {
         <Title>Iniciar Sesión</Title>
         <form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label>Email</Label>
+            <Label>Username</Label>
             <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Ingresa tu email"
-              invalid={email !== '' && !isEmailValid(email)}
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Ingresa tu nombre de usuario"
+              invalid={username !== '' && !isUsernameValid(username)}
             />
             <Icon><AiOutlineUser size={20} /></Icon>
-            {email !== '' && !isEmailValid(email) && <small style={{ color: 'red' }}>El correo electrónico no es válido.</small>}
+            {username !== '' && !isUsernameValid(username) && <small style={{ color: 'red' }}>El nombre de usuario no puede estar vacío.</small>}
           </FormGroup>
           <FormGroup>
             <Label>Contraseña</Label>
@@ -143,7 +143,7 @@ const App = () => {
             <Icon><AiOutlineLock size={20} /></Icon>
             {password !== '' && !isPasswordValid(password) && <small style={{ color: 'red' }}>La contraseña debe tener al menos 6 caracteres.</small>}
           </FormGroup>
-          <Button type="submit" disabled={!isEmailValid(email) || !isPasswordValid(password)}>Iniciar Sesión</Button>
+          <Button type="submit" disabled={!isUsernameValid(username) || !isPasswordValid(password)}>Iniciar Sesión</Button>
         </form>
       </LoginContainer>
     </Container>
