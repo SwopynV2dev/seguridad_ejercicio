@@ -26,3 +26,22 @@ crear usuario
 python manage.py createsuperuser
 
 python3 manage.py createsuperuser
+
+
+
+
+
+Instalar ReactNative
+
+- Instalar nodejs
+Va a descargar el ejuctable y lo instalas como cualquier otro programa
+https://nodejs.org/en/
+
+- Instalar 
+npm install -g react-native-cli
+
+- Instalar StyledComponents para los estilos css
+npm install styled-components
+
+- Crear un programa en reactNative 
+npx create-react-app elnombrequequeramos
