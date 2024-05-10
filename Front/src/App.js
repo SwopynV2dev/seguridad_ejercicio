@@ -82,7 +82,6 @@ const App = () => {
   const [password, setPassword] = useState('');
 
   const isUsernameValid = (username) => {
-    // You can apply your validation logic here
     return username.trim() !== '';
   };
 
@@ -102,10 +101,8 @@ const App = () => {
           body: JSON.stringify({ username, password }),
         });
         if (response.ok) {
-          // Handle successful login
           console.log('Login successful');
         } else {
-          // Handle login failure
           console.error('Login failed');
         }
       } catch (error) {
